@@ -4,6 +4,7 @@ import { GetCurrent } from '../../getCurrent'
 
 import s from './MyAccount.module.css'
 import { Link } from 'react-router-dom'
+import PageHeader from '../../components/header/PageHeader'
 
 const MyAccount = () => {
   const theme = useSelector((state) => state.theme)
@@ -42,6 +43,7 @@ const MyAccount = () => {
     >
       <div className={`w-100`}>
         <div className={`container-xl px-4 mt-4 `}>
+          <PageHeader></PageHeader>
           <div className={`row `}></div>
           <div className={`col-xl-12  `}>
             {/* Account details card */}

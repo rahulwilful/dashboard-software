@@ -11,6 +11,7 @@ import showToast from '../../components/Notification/ShowToast'
 
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
+import PageHeader from '../../components/header/PageHeader'
 
 const AddUser = () => {
   const navigate = useNavigate()
@@ -143,6 +144,7 @@ const AddUser = () => {
     >
       <div className={`w-100`}>
         <div className={`container-xl px-4 mt-4 `}>
+          <PageHeader></PageHeader>
           <div className={`row `}></div>
           <div className={`col-xl-12  `}>
             {/* Account details card */}
