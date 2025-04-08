@@ -479,8 +479,7 @@ const ThreeCardPokerDashboard = () => {
       <div className={` ${theme === 'dark' ? 'text-light' : 'text-dark'} pb-4   position_relative`}>
         <div className={`text-center text-shadow capitalize poppins-400`}>
           <PageHeader>
-
-          <h3> {table_limit_name ? table_limit_name : 'Title'}</h3>
+            <h3> {table_limit_name ? table_limit_name : 'Title'}</h3>
           </PageHeader>
         </div>
         <div className={`px-2 `}>

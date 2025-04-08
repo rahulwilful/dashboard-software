@@ -59,7 +59,7 @@ const _nav = [
     name: 'Settings',
     to: '/settings',
     className: 'text-capitalize',
-    icon: <i class="nav-icon bi bi-gear-fill me-2 text-light" />,
+    icon: <i className="nav-icon bi bi-gear-fill me-2 text-light" />,
     items: [
       {
         component: CNavItem,
@@ -97,7 +97,7 @@ const _nav = [
     component: CNavItem,
     name: 'Users',
     to: '/all/users',
-    icon: <i class="bi bi-people-fill nav-icon me-2 text-light"></i>,
+    icon: <i className="bi bi-people-fill nav-icon me-2 text-light"></i>,
   },
 ]
 

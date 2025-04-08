@@ -26,6 +26,8 @@ import { CardImage } from 'react-bootstrap-icons'
 import { GetCurrent } from '../../../getCurrent'
 import { Loader } from '../../../components/Loader'
 
+import PageHeader from '../../../components/header/PageHeader.js'
+
 gsap.registerPlugin(CustomEase)
 
 const AndarBaharDashboard = () => {
@@ -95,20 +97,19 @@ const AndarBaharDashboard = () => {
   const [toDate, setToDate] = useState('')
 
   useEffect(() => {
-    console.log('display: ', display)
+    //console.log('display: ', display)
   }, [display])
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      if (localStorage.getItem('andarBaharCallOnTimeInterval') === 'true') {
-        checkLive(limit)
-      }
+      checkLive(limit)
     }, 10000)
 
     return () => clearInterval(intervalId)
   }, [limit])
 
   const checkLive = async (limitParam) => {
+    console.log('checkLive called')
     const limitToUse = limitParam || limit
     try {
       const res = await axiosClient.get(
@@ -116,7 +117,7 @@ const AndarBaharDashboard = () => {
       )
 
       let data = res?.data?.result
-      console.log('response: ', data)
+      //console.log('response: ', data)
 
       let live = false
       const currentTime = new Date()
@@ -131,7 +132,7 @@ const AndarBaharDashboard = () => {
         }
       }
 
-      console.log('live status: ', live)
+      //console.log('live status: ', live)
       setLive(live)
 
       if (data?.length > 0) {
@@ -143,7 +144,7 @@ const AndarBaharDashboard = () => {
       }
       setRenderKey(renderKey + 1)
     } catch (err) {
-      console.log('err: ', err)
+      //console.log('err: ', err)
       setDisplay('nodata')
     }
 
@@ -161,7 +162,7 @@ const AndarBaharDashboard = () => {
   }, [])
 
   const getCurrent = async () => {
-    console.log('called getCurrent')
+    //console.log('called getCurrent')
 
     await GetCurrent('analysis')
     getGameData(100)
@@ -176,7 +177,7 @@ const AndarBaharDashboard = () => {
       )
       processData(res?.data?.result)
       let data = res?.data?.result
-      console.log('response: ', data)
+      //console.log('response: ', data)
       if (data?.length > 0) {
         setDisplay('data')
       }
@@ -188,13 +189,13 @@ const AndarBaharDashboard = () => {
       setRenderKey(renderKey + 1)
       localStorage.setItem('andarBaharCallOnTimeInterval', true)
     } catch (err) {
-      console.log('err: ', err)
+      //console.log('err: ', err)
       setDisplay('nodata')
     }
   }
 
   const getCustomeGameDataByRadio = async (limitParam) => {
-    console.log('limitParam: ', limitParam)
+    //console.log('limitParam: ', limitParam)
     setData([])
     const limitToUse = limitParam || limit
 
@@ -202,12 +203,12 @@ const AndarBaharDashboard = () => {
       const res = await axiosClient.get(
         `/game/get/andar_bahar/${game_type_id}/${table_limit_id}/${limitParam}`,
       )
-      console.log('getCustomeGameDataByRadio response: ', res?.data?.result)
+      //console.log('getCustomeGameDataByRadio response: ', res?.data?.result)
       processData(res?.data?.result)
       setRenderKey(renderKey + 1)
       setLimit(limitParam)
       let data = res?.data?.result
-      // console.log('response: ', data)
+      // //console.log('response: ', data)
       if (data?.length > 0) {
         setDisplay('data')
       }
@@ -216,7 +217,7 @@ const AndarBaharDashboard = () => {
         setDisplay('nodata')
       }
     } catch (err) {
-      //console.log('err: ', err)
+      ////console.log('err: ', err)
       setDisplay('nodata')
     }
     localStorage.setItem('andarBaharCallOnTimeInterval', true)
@@ -228,10 +229,10 @@ const AndarBaharDashboard = () => {
       const res = await axiosClient.get(
         `/game/get/andar_bahar/${game_type_id}/${table_limit_id}/${customLimit}`,
       )
-      console.log('getCustomeGameDataByRadio response: ', res?.data?.result)
+      //console.log('getCustomeGameDataByRadio response: ', res?.data?.result)
       processData(res?.data?.result)
       let data = res?.data?.result
-      console.log('response: ', data)
+      //console.log('response: ', data)
       if (data?.length > 0) {
         setDisplay('data')
       }
@@ -242,7 +243,7 @@ const AndarBaharDashboard = () => {
       setRenderKey(renderKey + 1)
       setLimit(customLimit)
     } catch (err) {
-      console.log('err: ', err)
+      //console.log('err: ', err)
       setDisplay('nodata')
     }
 
@@ -251,7 +252,7 @@ const AndarBaharDashboard = () => {
 
   const getGameDataByDate = async () => {
     setData([])
-    console.log('first date: ', fromDate, 'second date: ', toDate)
+    //console.log('first date: ', fromDate, 'second date: ', toDate)
     try {
       const res = await axiosClient.post(
         `/game/get/andar_bahar/${game_type_id}/${table_limit_id}`,
@@ -262,7 +263,7 @@ const AndarBaharDashboard = () => {
       )
       processData(res?.data?.result)
       let data = res?.data?.result
-      console.log('response: ', data)
+      //console.log('response: ', data)
       if (data?.length > 0) {
         setDisplay('data')
       }
@@ -272,7 +273,7 @@ const AndarBaharDashboard = () => {
       }
       setRenderKey(renderKey + 1)
     } catch (err) {
-      console.log('err: ', err)
+      //console.log('err: ', err)
       setDisplay('nodata')
     }
 
@@ -283,8 +284,15 @@ const AndarBaharDashboard = () => {
    * Process the data received from the API to update the state variables.
    * @param {Array} resData - The data received from the API.
    */
+
+  useEffect(() => {
+    if (data.length > 0) {
+      console.log('data: ', data)
+    }
+  }, [data])
+
   const processData = (resData) => {
-    console.log('processData resData: ', resData)
+    //console.log('processData resData: ', resData)
     let live = false
     const currentTime = new Date()
 
@@ -298,12 +306,13 @@ const AndarBaharDashboard = () => {
         live = true
       }
     }
-    console.log('processData1 ')
+    //console.log('processData1 ')
     // If data is already loaded and the connection is not live, return early
-    if (data?.length > 0 && live == false) {
+    /*  if (data?.length > 0 && live == false) {
+      console.log("returning processData function and data.length",data?.length )
       return
-    }
-    console.log('processData2 ')
+    } */
+    //console.log('processData2 ')
 
     setLive(live)
 
@@ -312,7 +321,7 @@ const AndarBaharDashboard = () => {
       setLiveData(resData[0])
     }
 
-    console.log('processData3 ')
+    //console.log('processData3 ')
 
     // Initialize counters
     let andarTotal = 0
@@ -333,7 +342,7 @@ const AndarBaharDashboard = () => {
       if (resData[i]?.side_win == 'A') andarShot++
       if (resData[i]?.side_win == 'B') baharShot++
     }
-    console.log('processData4 ')
+    //console.log('processData4 ')
 
     // Initialize streak variables
     let streak = []
@@ -342,7 +351,7 @@ const AndarBaharDashboard = () => {
     let baharStreak = 0
     let curWinner = resData[0]?.winner
 
-    console.log('processData5 ')
+    //console.log('processData5 ')
 
     // Iterate through the data and update streak variables
     for (let i = 1; i < resData.length; i++) {
@@ -356,7 +365,7 @@ const AndarBaharDashboard = () => {
         curWinner = resData[i]?.winner
       }
     }
-    console.log('processData6 ')
+    //console.log('processData6 ')
     // If there is a remaining streak, add it to the streak array
     if (tempStreak.length > 0) streak.push(tempStreak)
 
@@ -371,7 +380,7 @@ const AndarBaharDashboard = () => {
     let tempAndarCards2 = []
     let tempBaharCards = resData[0]?.splittedBahar
     let tempBaharCards2 = []
-    console.log('processData7 ')
+    //console.log('processData7 ')
 
     // Iterate through the andar and bahar cards and update the arrays
     for (let i in tempAndarCards) {
@@ -397,7 +406,7 @@ const AndarBaharDashboard = () => {
         }
       }
     }
-    console.log('processData8 ')
+    //console.log('processData8 ')
 
     // Iterate through the bahar cards and update the array
     for (let i in tempBaharCards) {
@@ -423,7 +432,7 @@ const AndarBaharDashboard = () => {
         }
       }
     }
-    console.log('processData9 ')
+    //console.log('processData9 ')
     // If there are no shots, hide the doughnut chart
     if (andarShot == 0 && baharShot == 0) {
       setShowDoughnutChart(false)
@@ -437,7 +446,7 @@ const AndarBaharDashboard = () => {
         setJokerCardImage(CardImages[i]?.card)
       }
     }
-    console.log('processData10 ')
+    //console.log('processData10 ')
     // Set the initial index to 0
     setIndex(0)
 
@@ -455,24 +464,25 @@ const AndarBaharDashboard = () => {
     setSideWin(resData[0]?.side_win)
 
     // Set the data
+    console.log('processedData: ', resData)
     setData(resData)
-    console.log('processData11 ')
+    //console.log('processData11 ')
 
     // Set the data length in local storage
     localStorage.setItem('andarBaharDataLength', resData.length)
-    console.log('processData12 ')
+    //console.log('processData12 ')
     // Set the andar vs bahar win data
     setAndarWinVsBaharWin([
       { name: 'Andar ', value: andarTotal },
       { name: 'Bahar ', value: baharTotal },
     ])
-    console.log('processData13 ')
+    //console.log('processData13 ')
     // Set the andar shot vs bahar shot win data
     setAndarShotWinVsBaharShotWin([
       { name: 'Andar Shot', value: andarShot },
       { name: 'Bahar Shot', value: baharShot },
     ])
-    console.log('processData14 ')
+    //console.log('processData14 ')
     // Set the graph data
     setGraphData([
       { name: 'Andar ', value: andarTotal, color: 'rgb(36, 141, 92)' },
@@ -480,14 +490,14 @@ const AndarBaharDashboard = () => {
       { name: 'Andar Shot', value: andarShot, color: 'rgb(36, 141, 92)' },
       { name: 'Bahar Shot', value: baharShot, color: 'rgb(255, 43, 50)' },
     ])
-    console.log('processData15 ')
+    //console.log('processData15 ')
 
     // Set the streak data
     /*  setStreakData([
       { name: 'Andar Streak', value: andarStreak },
       { name: 'Bahar Streak', value: baharStreak },
     ]) */
-    console.log('processData last ')
+    //console.log('processData last ')
   }
 
   const handleIndexChange = (event) => {
@@ -694,11 +704,10 @@ const AndarBaharDashboard = () => {
         <div className={``}>
           <div className={``}>
             <PageHeader>
-
-            <h3 className="text-center text-shadow capitalize">
-              {' '}
-              {table_limit_name ? table_limit_name : 'Title'}
-            </h3>
+              <h3 className="text-center text-shadow capitalize">
+                {' '}
+                {table_limit_name ? table_limit_name : 'Title'}
+              </h3>
             </PageHeader>
           </div>
 
