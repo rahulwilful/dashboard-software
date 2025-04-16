@@ -9,7 +9,8 @@ function createWindow() {
     height: 650,
     autoHideMenuBar: true,
 
-    frame: true,
+    frame: true, //controlls like minimize or close 
+    fullscreen: true,// for full screen mode
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,

@@ -5,6 +5,10 @@
   transform: translate(-50%, -50%);
 }
 
+.background {
+  background: linear-gradient(90deg, #2f2f2f, #1e2122);
+}
+
 @media (max-width: 575px) {
   .card_container {
     width: 70%;

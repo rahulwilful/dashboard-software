@@ -92,7 +92,7 @@ const Login = () => {
       showToast('Login successful', 'success')
 
       setTimeout(() => {
-       navigate('/')
+        navigate('/')
       }, 1500)
       //
     } catch (err) {
@@ -109,7 +109,7 @@ const Login = () => {
     setIsLoading(false)
   }
 
-  const handleShowLoginForm = () => {
+  /*  const handleShowLoginForm = () => {
     setShowForm(!showForm)
     gsap.from('.card-group ', {
       delay: 0.5,
@@ -118,22 +118,26 @@ const Login = () => {
       duration: 1,
       ease: 'power1.out',
     })
-  }
+  } */
 
   return (
-    <div className="bg-dark min-vh-100 d-flex flex-row align-items-center position-relative">
+    <div
+      className={` ${s.background} min-vh-100 d-flex flex-row align-items-center position-relative`}
+    >
       {/* <Earth />  */}
       <div
-        className={`position-absolute ${showForm ? 'd-block' : 'd-none'}   ${s.card_container}   `}
+        className={`position-absolute ${showForm ? 'd-block' : 'd-block'}   ${s.card_container}   `}
       >
-        <div className={`container d-flex justify-content-center align-items-center h-100`}>
-          <div className={`row justify-content-center`}>
+        <div className={`container d-flex justify-content-center  w-100 align-items-center h-100`}>
+          <div className={`row justify-content-center `}>
             <div className={`col-12`}>
               <div className={`card-group `}>
-                <div className={`card p-4 bg-black bg-gradient bg-opacity-75 text-white`}>
+                <div className={`card p-4 bg-black bg-gradient shadow-m text-white`}>
                   <div className={`card-body`}>
                     <form onSubmit={handleSubmit} className={`d-flex flex-column gap-3`}>
-                      <h1 className={`text-center poppins-500`}>Login</h1>
+                      <h1 className={`text-center poppins-500`}>
+                        <img src={LOGO} alt="LOGO" style={{ width: '100px' }} />
+                      </h1>
 
                       <div className={``}>
                         <div className={`input-group mb-3`}>
@@ -172,7 +176,7 @@ const Login = () => {
                           ) : (
                             <button
                               type="submit"
-                              className={`btn text-light poppins-500 bg-primary bg-gradient px-4`}
+                              className={`btn btn-outline-primary shadows-s text-light poppins-500  px-4`}
                             >
                               Login
                             </button>
@@ -189,7 +193,7 @@ const Login = () => {
       </div>
       <div
         className={`position-absolute top-50 start-50 translate-middle ${
-          !showForm ? 'd-block' : 'd-none'
+          !showForm ? 'd-none' : 'd-none'
         }`}
       >
         <button
