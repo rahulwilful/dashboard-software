@@ -686,34 +686,22 @@ const ThreeCardPokerDashboard = () => {
               >
                 <ShowHouseCards cards={communityCards} name="Community Cards" win={'community'} />
               </div>
-              <div
-                className={`col-12 col-sm-6 col-md-4 box ${s.opacity}  ${player1cards?.length == 0 ? 'd-none' : ''} `}
-              >
+              <div className={`col-12 col-sm-6 col-md-4 box ${s.opacity}  `}>
                 <ShowPlayerCards cards={player1cards} name="Player 1" win={currentWinners[0]} />
               </div>
-              <div
-                className={`col-12 col-sm-6 col-md-4 box ${s.opacity}  ${player2cards?.length == 0 ? 'd-none' : ''} `}
-              >
+              <div className={`col-12 col-sm-6 col-md-4 box ${s.opacity}  `}>
                 <ShowPlayerCards cards={player2cards} name="Player 2" win={currentWinners[1]} />
               </div>
-              <div
-                className={`col-12 col-sm-6 col-md-4 box ${s.opacity}  ${player3cards?.length == 0 ? 'd-none' : ''} `}
-              >
+              <div className={`col-12 col-sm-6 col-md-4 box ${s.opacity}  `}>
                 <ShowPlayerCards cards={player3cards} name="Player 3" win={currentWinners[2]} />
               </div>
-              <div
-                className={`col-12 col-sm-6 col-md-4 box ${s.opacity}  ${player4cards?.length == 0 ? 'd-none' : ''} `}
-              >
+              <div className={`col-12 col-sm-6 col-md-4 box ${s.opacity}  `}>
                 <ShowPlayerCards cards={player4cards} name="Player 4" win={currentWinners[3]} />
               </div>
-              <div
-                className={`col-12 col-sm-6 col-md-4 box ${s.opacity}  ${player5cards?.length == 0 ? 'd-none' : ''} `}
-              >
+              <div className={`col-12 col-sm-6 col-md-4 box ${s.opacity}  `}>
                 <ShowPlayerCards cards={player5cards} name="Player 5" win={currentWinners[4]} />
               </div>
-              <div
-                className={`col-12 col-sm-6 col-md-4 box ${s.opacity}  ${player6cards?.length == 0 ? 'd-none' : ''} `}
-              >
+              <div className={`col-12 col-sm-6 col-md-4 box ${s.opacity}  `}>
                 <ShowPlayerCards cards={player6cards} name="Player 6" win={currentWinners[5]} />
               </div>
               <div

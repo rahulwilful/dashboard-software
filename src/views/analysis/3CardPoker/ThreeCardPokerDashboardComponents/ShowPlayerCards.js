@@ -6,11 +6,14 @@ import s from './HouseCardAndPlayers.module.css'
 import { ScrollTrigger } from 'gsap/all'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
+import NoDataFull from '../../../NoData/NoDataFull'
+import NoData from '../../../NoData/NoData'
 
 const ShowPlayerCards = (props) => {
   const [index, setIndex] = useState(0)
   const green = 'linear-gradient(to bottom, rgb(100, 251, 168), rgb(37, 247, 131))'
   const red = 'rgb(242, 55, 55)'
+  const dark = 'linear-gradient(to bottom, rgb(58, 58, 58), rgb(30, 29, 29))'
 
   const theme = useSelector((theme) => theme?.theme)
   const [cards, setCards] = useState([])
@@ -75,7 +78,7 @@ const ShowPlayerCards = (props) => {
     <div
       className={` shadow-s rounded   ${themeBorder} `}
       key={props?.cards}
-      style={{ background: props?.win == true ? green : red }}
+      style={{ background: props?.cards.length == 0 ? dark : props?.win == true ? green : red }}
     >
       <div
         className={`border-bottom  ${props?.win == true ? 'border-secondary' : 'border-light'}  border-opacity-25  py-1 px-3 fontTextHeading`}
@@ -116,7 +119,9 @@ const ShowPlayerCards = (props) => {
               </div>
             ))
           ) : (
-            <p>No cards available</p>
+            <div className={`d-flex justify-content-center align-items-center  w-100`}>
+              <NoData />
+            </div>
           )}
         </div>
       </div>

@@ -161,12 +161,10 @@ const AndarBaharDashboard = () => {
     axiosClient.delete(`/game/older-than`)
   }, [])
 
-  
-
   const getCurrent = async () => {
     //console.log('called getCurrent')
 
-    await GetCurrent('analysis',navigate)
+    await GetCurrent('analysis', navigate)
     getGameData(100)
     return
   }
@@ -856,7 +854,7 @@ const AndarBaharDashboard = () => {
               <div className={`row g-3   align-items-stretch`}>
                 <div className={`col-12 col-md-5 box ${s.opacity}`}>
                   <div
-                    className={`${andarCards?.length > 0 ? '' : 'd-none'} shadow-s px-2 pb-2 rounded  ${themeBorder} `}
+                    className={`${andarCards?.length > 0 ? '' : 'd-none'} shadow-s px-2 pb-2 rounded  ${winner == 'A' ? s.winner : themeBorder} `}
                   >
                     <div
                       className={`border-bottom border-secondary  border-opacity-25  py-1 px-3 fontTextHeading`}
@@ -985,7 +983,7 @@ const AndarBaharDashboard = () => {
                 </div>
                 <div className={`col-12 col-md-5 box ${s.opacity}`}>
                   <div
-                    className={`${baharCards?.length > 0 ? '' : 'd-none'} shadow-s px-2 pb-2 rounded    ${themeBorder} `}
+                    className={`${baharCards?.length > 0 ? '' : 'd-none'} shadow-s px-2 pb-2 rounded    ${winner == 'B' ? s.winner : themeBorder}  `}
                   >
                     <div className={``}>
                       <div
