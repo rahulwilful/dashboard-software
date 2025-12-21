@@ -272,7 +272,7 @@ const Dashboard = () => {
               <GameCard
                 game={rouletteData?.[0]?.game_type_name}
                 data={rouletteData}
-                lastNumber={rouletteData?.[0]?.winning_number}
+                lastNumber={rouletteData?.[0]?.winning_number}  
               />
             </div>
             <div className="col-12 col-sm-6 col-lg-4 on_scroll">

@@ -7,6 +7,10 @@ import s from './GameCard.module.css'
 const GameCard = (props) => {
   const [image, setImage] = useState()
 
+  useEffect(() => {
+    console.log('image: ', image)
+  }, [image])
+
   const handleFaceImages = () => {
     if (props?.game?.toLowerCase()?.includes('baccarat')) setImage(BaccaratTables[0]?.table)
     else if (props?.game?.toLowerCase()?.includes('andar bahar')) setImage(BaccaratTables[1]?.table)

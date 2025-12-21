@@ -39,12 +39,11 @@ const AddTable = (props) => {
   })
 
   const navigate = useNavigate()
-  
 
   // Fetch configurations for dropdowns
   const getConfigs = async () => {
     try {
-      await GetCurrent('limits',navigate)
+      await GetCurrent('limits', navigate)
       const response = await axiosClient.get('config/get/configs')
       const { languages, themes, backgrounds, currencys } = response?.data || {}
       setLanguages(languages || [])
@@ -94,9 +93,9 @@ const AddTable = (props) => {
     if (!formData?.language_id) return showToast('Select Language', 'info')
     if (!formData?.side_bet_max) return showToast('Enter Side Bet Maximum', 'info')
     if (!formData?.currency_id) return showToast('Select Currency', 'info')
-    if (formData?.min_bet > formData?.max_bet)
+    if (formData?.min_bet < formData?.max_bet)
       return showToast('Minimum Bet should be less than Maximum Bet', 'info', 3000)
-    if (formData?.side_bet_min > formData?.side_bet_max)
+    if (formData?.side_bet_min < formData?.side_bet_max)
       return showToast('Side Bet Minimum should be less than Side Bet Maximum', 'info', 3000)
 
     setShowModal(true) // Show modal
