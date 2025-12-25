@@ -58,6 +58,9 @@ const UpdateTableLimits = (props) => {
       setGames(temp)
       setOriginalGames(temp)
       setRenderKey(renderKey + 1)
+     setTimeout(()=>{
+      window.location.reload();
+     },1500)
     } catch (error) {
       console.error(error)
       showToast('Error while updating Table Type', 'error')

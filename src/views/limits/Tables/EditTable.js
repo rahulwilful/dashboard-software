@@ -21,12 +21,13 @@ const EditTable = () => {
   const [currencys, setCurrencys] = useState([])
   const [themeClass, setThemeClass] = useState('bg-light text-dark border')
   const [themeBorder, setThemeBorder] = useState('bg-light text-dark border')
+  const [activeMac,setActiveMac] = useState(false)
 
   const getConfigs = async () => {
     await GetCurrent('limits', navigate)
     try {
       const response = await axiosClient.get('config/get/configs')
-      console.log('response', response)
+      //console.log('response', response)
 
       const { languages, themes, backgrounds, games, currencys } = response?.data
       setLanguages(languages)
@@ -41,7 +42,7 @@ const EditTable = () => {
       let currency = ''
 
       const { data } = await axiosClient.get(`/table/limits/get/${params?.id}`)
-      console.log('response2', data)
+      console.log('table data res', data)
 
       for (let i in languages) {
         if (languages[i]?.language_id == data?.result?.language_id) {
@@ -67,9 +68,9 @@ const EditTable = () => {
         }
       }
 
-      console.log('language: ', language)
+     /*  console.log('language: ', language)
       console.log('background: ', background)
-      console.log('theme: ', theme)
+      console.log('theme: ', theme) */
 
       setFormData({
         ...formData,
@@ -82,11 +83,16 @@ const EditTable = () => {
         side_bet_max: data?.result?.side_bet_max,
         s_message: data?.result?.s_message,
         commission: data?.result?.commission,
+        ActiveMac:data?.result?.ActiveMac,
         theme: theme,
         background: background,
         language: language,
         currency_id: currency,
+
       })
+      if(data?.result?.ActiveMac){
+        setActiveMac(true)
+      }
     } catch (error) {
       console.error(error)
     }
@@ -107,6 +113,7 @@ const EditTable = () => {
     background: '',
     currency_id: '',
     commission: false,
+    ActiveMac:''
   })
 
   useEffect(() => {
@@ -150,7 +157,7 @@ const EditTable = () => {
   }
 
   const handleUpdate = async () => {
-    const { s_message, min_bet, max_bet, theme, background, side_bet_min, language, side_bet_max } =
+    const { s_message, min_bet, max_bet, theme, background, side_bet_min, language, side_bet_max, } =
       formData
 
     if (!min_bet) {
@@ -184,9 +191,9 @@ const EditTable = () => {
       return
     }
     if (!formData?.currency_id) return showToast('Select Currency', 'info')
-    if (formData?.min_bet < formData?.max_bet)
+    if (formData?.min_bet >= formData?.max_bet)
       return showToast('Minimum Bet should be less than Maximum Bet', 'info', 3000)
-    if (formData?.side_bet_min < formData?.side_bet_max)
+    if (formData?.side_bet_min >= formData?.side_bet_max)
       return showToast('Side Bet Minimum should be less than Side Bet Maximum', 'info', 3000)
 
     let dataToSend = {
@@ -404,7 +411,7 @@ const EditTable = () => {
                 </div>
 
                 <div className={`col-12 col-md-6 col-xl-4`}>
-                  <div className="mb-3">
+                  <div className="mb-3 d-flex gap-3 flex-wrap">
                     <div
                       className={` mt-0 mt-md-4 mt-xl-0 ${params?.game == 'baccarat' ? 'd-block' : 'd-none'}`}
                     >
@@ -419,6 +426,22 @@ const EditTable = () => {
                           }
                         />
                         <label className="form-check-label animate">Commission</label>
+                      </div>
+                    </div>
+                     <div
+                      className={` mt-0 mt-md-4 mt-xl-0 `}
+                    >
+                      <div className="form-check ">
+                        <input
+                          className="form-check-input animate"
+                          type="checkbox"
+                          name="Configured"
+                          checked={activeMac}
+                          onChange={() =>
+                            setFormData(!activeMac)
+                          }
+                        />
+                        <label className="form-check-label animate">Configured</label>
                       </div>
                     </div>
                   </div>

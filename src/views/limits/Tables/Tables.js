@@ -272,7 +272,11 @@ const Tables = (props) => {
                     >
                       Game: {table?.game_type_name} <br /> Language: {table?.language}
                     </p>
-                    <div className="d-flex justify-content-end">
+                    <div className="d-flex  justify-content-between">
+                      <div>
+                        <button type="button" class={`btn ${table?.ActiveMac ? 'btn-success' : 'btn-danger'}  poppins-200`} style={{fontSize:10}}></button>
+
+                      </div>
                       <i
                         onClick={() => handleNavigate(table?.table_limit_id, table?.game_type_name)}
                         className={`bi bi-pen-fill icon-size font-size icon icon-hover pointer text-shadow icon-hover ${
