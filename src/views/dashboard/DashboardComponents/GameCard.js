@@ -6,6 +6,9 @@ import s from './GameCard.module.css'
 
 const GameCard = (props) => {
   const [image, setImage] = useState()
+  const [gameType, setGameType] = useState('')
+  const [tableName, setTableName] = useState('')
+  const [tableLimitName, setTableLimitName] = useState('')
 
   useEffect(() => {
     console.log('image: ', image)
@@ -48,18 +51,26 @@ const GameCard = (props) => {
       className={`${theme === 'dark' ? 'text-light' : 'text-dark'} overflow-hidden table-main h-100 p-0 container capitalize card border-0 shadow-s card-hover`}
     >
       <div className="overflow-hidden w-100 h-75 rounded-top">
-        <img
-          src={props?.game === 'roulette' ? roulletImage : image}
-          className="w-100 h-100 card-hover2 drop_shadow bg-dark bg-gradient object-fit-cover"
-          alt={props?.game}
-        />
+        {props?.game === 'roulette' ? (
+          <img
+            src={roulletImage}
+            className="w-100 h-100 card-hover2 drop_shadow bg-dark bg-gradient object-fit-cover"
+            alt={props?.game}
+          />
+        ) : (
+          <img
+            src={image ? image : BaccaratTables[18]?.table}
+            className="w-100 h-100 card-hover2 drop_shadow bg-dark bg-gradient object-fit-cover"
+            alt={props?.game}
+          />
+        )}
       </div>
       <div className="d-flex flex-column gap-2 p-2 poppins-400">
         <div className={`text-dark ${props?.lastNumber ? '' : 'd-none'}`}>
           <span className="fw-semibold">Winning Number</span>: {props?.lastNumber ?? ''}
         </div>
         <div className={`text-dark ${props?.winner ? '' : 'd-none'}`}>
-          <span className="fw-semibold">Winner</span>: {props?.winner}
+          <span className="fw-semibold">Winner</span>: {props?.winner ? props.winner : 'NA'}
         </div>
         <div className="text-dark">
           <span className="fw-semibold">Table Name</span>: {props?.data?.[0]?.table_name}

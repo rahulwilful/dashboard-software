@@ -21,7 +21,7 @@ const EditTable = () => {
   const [currencys, setCurrencys] = useState([])
   const [themeClass, setThemeClass] = useState('bg-light text-dark border')
   const [themeBorder, setThemeBorder] = useState('bg-light text-dark border')
-  const [activeMac,setActiveMac] = useState(false)
+  const [activeMac, setActiveMac] = useState(false)
 
   const getConfigs = async () => {
     await GetCurrent('limits', navigate)
@@ -68,7 +68,7 @@ const EditTable = () => {
         }
       }
 
-     /*  console.log('language: ', language)
+      /*  console.log('language: ', language)
       console.log('background: ', background)
       console.log('theme: ', theme) */
 
@@ -83,14 +83,13 @@ const EditTable = () => {
         side_bet_max: data?.result?.side_bet_max,
         s_message: data?.result?.s_message,
         commission: data?.result?.commission,
-        ActiveMac:data?.result?.ActiveMac,
+        ActiveMac: data?.result?.ActiveMac ? true : false,
         theme: theme,
         background: background,
         language: language,
         currency_id: currency,
-
       })
-      if(data?.result?.ActiveMac){
+      if (data?.result?.ActiveMac) {
         setActiveMac(true)
       }
     } catch (error) {
@@ -113,7 +112,7 @@ const EditTable = () => {
     background: '',
     currency_id: '',
     commission: false,
-    ActiveMac:''
+    ActiveMac: '',
   })
 
   useEffect(() => {
@@ -157,7 +156,7 @@ const EditTable = () => {
   }
 
   const handleUpdate = async () => {
-    const { s_message, min_bet, max_bet, theme, background, side_bet_min, language, side_bet_max, } =
+    const { s_message, min_bet, max_bet, theme, background, side_bet_min, language, side_bet_max } =
       formData
 
     if (!min_bet) {
@@ -415,9 +414,9 @@ const EditTable = () => {
                     <div
                       className={` mt-0 mt-md-4 mt-xl-0 ${params?.game == 'baccarat' ? 'd-block' : 'd-none'}`}
                     >
-                      <div className="form-check ">
+                      <div className="form-check  ">
                         <input
-                          className="form-check-input animate"
+                          className="form-check-input animate pointer"
                           type="checkbox"
                           name="commission"
                           checked={formData?.commission}
@@ -428,18 +427,17 @@ const EditTable = () => {
                         <label className="form-check-label animate">Commission</label>
                       </div>
                     </div>
-                     <div
-                      className={` mt-0 mt-md-4 mt-xl-0 `}
-                    >
+                    <div className={` mt-0 mt-md-4 mt-xl-0 pointer `}>
                       <div className="form-check ">
                         <input
-                          className="form-check-input animate"
+                          className="form-check-input pointer animate"
                           type="checkbox"
                           name="Configured"
-                          checked={activeMac}
-                          onChange={() =>
-                            setFormData(!activeMac)
-                          }
+                          checked={formData.ActiveMac}
+                          onChange={() => {
+                            setFormData({ ...formData, ActiveMac: !formData.ActiveMac })
+                            setActiveMac(!activeMac)
+                          }}
                         />
                         <label className="form-check-label animate">Configured</label>
                       </div>

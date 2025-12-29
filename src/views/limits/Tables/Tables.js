@@ -62,7 +62,7 @@ const Tables = (props) => {
 
   const getTables = async () => {
     try {
-      await GetCurrent('limits',navigate)
+      await GetCurrent('limits', navigate)
       const { data } = await axiosClient.get(`/table/limits/get/tables/${props?.id}`)
       setTables(data?.result)
       let tempData = data?.result
@@ -274,8 +274,11 @@ const Tables = (props) => {
                     </p>
                     <div className="d-flex  justify-content-between">
                       <div>
-                        <button type="button" class={`btn ${table?.ActiveMac ? 'btn-success' : 'btn-danger'}  poppins-200`} style={{fontSize:10}}></button>
-
+                        <button
+                          type="button"
+                          class={`btn ${table?.ActiveMac ? 'btn-success' : 'btn-danger'}  poppins-200`}
+                          style={{ fontSize: 10 }}
+                        ></button>
                       </div>
                       <i
                         onClick={() => handleNavigate(table?.table_limit_id, table?.game_type_name)}
