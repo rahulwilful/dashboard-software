@@ -89,6 +89,7 @@ const TableAnalysis = () => {
   }
 
   const handleViewDashboard = (game_type_name, table_limit_name, game_type_id, table_limit_id) => {
+    console.log(game_type_name, ' ', table_limit_name, ' ', game_type_id, ' ', table_limit_id)
     if (game?.toLowerCase().includes('roulette')) {
       navigate(
         `/dashboard/roulette/${game_type_name}/${table_limit_name}/${game_type_id}/${table_limit_id}`,
@@ -115,6 +116,12 @@ const TableAnalysis = () => {
     if (game?.toLowerCase().includes('5 card poker')) {
       navigate(
         `/dashboard/threecardpoker/${game_type_name}/${table_limit_name}/${game_type_id}/${table_limit_id}`,
+      )
+    }
+
+    if (game?.toLowerCase().includes('dragon tiger')) {
+      navigate(
+        `/dashboard/dragontiger/${game_type_name}/${table_limit_name}/${game_type_id}/${table_limit_id}`,
       )
     }
 
@@ -145,7 +152,7 @@ const TableAnalysis = () => {
   const getCurrent = async () => {
     console.log('called getCurrent')
 
-    await GetCurrent('analysis',navigate)
+    await GetCurrent('analysis', navigate)
     getTables()
     return
   }

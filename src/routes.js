@@ -16,6 +16,9 @@ const ManageData = React.lazy(() => import('./views/settings/Configs/ManageData'
 
 const RouletteDashboard = React.lazy(() => import('./views/analysis/Roulette/RouletteDashboard'))
 const BaccaratDashboard = React.lazy(() => import('./views/analysis/Baccarat/BaccaratDashboard.js'))
+const DragonTigerDashboard = React.lazy(
+  () => import('./views/analysis/DragonTiger/DragonTigerDashboard.js'),
+)
 const AndarBaharDashboard = React.lazy(
   () => import('./views/analysis/AndarBahar/AndarBaharDashboard.js'),
 )
@@ -79,6 +82,11 @@ const routes = [
     path: '/dashboard/andarbahar/:game/:table_limit_name/:game_type_id/:table_limit_id',
     name: 'Dashboard',
     element: AndarBaharDashboard,
+  },
+  {
+    path: '/dashboard/dragontiger/:game/:table_limit_name/:game_type_id/:table_limit_id',
+    name: 'Dashboard',
+    element: DragonTigerDashboard,
   },
   {
     path: '/dashboard/:game/:table_limit_name/:game_type_id/:table_limit_id',
