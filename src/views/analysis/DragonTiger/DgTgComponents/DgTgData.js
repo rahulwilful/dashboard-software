@@ -171,8 +171,8 @@ export const Cards = [
 ]
 
 export const SideWin = [
-  { name: 'Player Streak', short: 'PP', value: 0, color: 'rgb(55, 64, 239)' },
-  { name: 'Banker Streak', short: 'BP', value: 0, color: 'rgb(255, 43, 50)' },
+  { name: 'Dragon Streak', short: 'PP', value: 0, color: 'rgb(55, 64, 239)' },
+  { name: 'Tiger Streak', short: 'BP', value: 0, color: 'rgb(255, 43, 50)' },
   { name: 'Player Pair', short: 'PP', value: 0, color: 'rgb(21, 115, 253)' },
   { name: 'Banker Pair', short: 'BP', value: 0, color: 'rgb(54, 162, 235)' },
   { name: 'Tie Game', short: 'TG', value: 0, color: 'rgb(255, 205, 86)' },
@@ -189,8 +189,8 @@ export const SideWin = [
 ]
 
 export const ShoeSideWin = [
-  { name: 'Player Streak', short: 'PP', value: 0, color: 'rgb(55, 64, 239)' },
-  { name: 'Banker Streak', short: 'BP', value: 0, color: 'rgb(255, 43, 50)' },
+  { name: 'Dragon Streak', short: 'PP', value: 0, color: 'rgb(55, 64, 239)' },
+  { name: 'Tiger Streak', short: 'BP', value: 0, color: 'rgb(255, 43, 50)' },
   { name: 'Player Pair', short: 'PP', value: 0, color: 'rgb(21, 115, 253)' },
   { name: 'Banker Pair', short: 'BP', value: 0, color: 'rgb(54, 162, 235)' },
   { name: 'Tie Game', short: 'TG', value: 0, color: 'rgb(255, 205, 86)' },

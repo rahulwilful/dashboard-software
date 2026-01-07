@@ -35,11 +35,11 @@ const renderCustomizedLabel = ({
 }
 
 const PieChartComponent = (props) => {
-  const [bankerVsPlayer, setBankerVsPlayer] = useState(props?.bankerVsPlayer ?? [])
+  const [data, setData] = useState(props?.dragonVsTiger ?? [])
 
   useEffect(() => {
-    setBankerVsPlayer(props?.bankerVsPlayer ?? [])
-  }, [props?.bankerVsPlayer])
+    setData(props?.dragonVsTiger ?? [])
+  }, [props?.dragonVsTiger])
 
   return (
     <ResponsiveContainer width="100%" height={300} className={'text-shadow '}>
@@ -48,7 +48,7 @@ const PieChartComponent = (props) => {
         <Tooltip />
         <Pie
           className="drop_shadow"
-          data={bankerVsPlayer}
+          data={data}
           cx="50%"
           cy="50%"
           outerRadius={80}

@@ -36,9 +36,9 @@ const DragonTigerDashboard = () => {
 
   const [shoePlayerBankerComponent, setShoePlayerBankerComponent] = useState(false)
   const [data, setData] = useState([{ shoe: 0, data: [] }])
-  const [bankerVsPlayer, setBankerVsPlayer] = useState([
-    { name: 'Banker', value: 0 },
-    { name: 'Player', value: 0 },
+  const [dragonVsTiger, setDragonVsTiger] = useState([
+    { name: 'Dragon', value: 0 },
+    { name: 'Tiger', value: 0 },
     { name: 'Tie', value: 0 },
   ])
 
@@ -275,25 +275,25 @@ const DragonTigerDashboard = () => {
     let tempShoe = resData[0]?.shoe_no
     let tempData = []
     let data = []
-    let playerStreak = 0
-    let bankerStreak = 0
-    let playerPair = 0
-    let bankerPair = 0
+    let dragonStreak = 0
+    let tigerStreak = 0
+    let drogonPair = 0
+    let tigerPair = 0
     let streak = []
     let tempStreak = []
     let flag = 0
     let tempCurrentWinner = ''
 
     for (let i in resData) {
-      if (resData[i]?.winner == 'B' || resData[i]?.winner == 'P') {
+      if (resData[i]?.winner == 'D' || resData[i]?.winner == 'T') {
         tempCurrentWinner = resData[i]?.winner
         break
       }
     }
 
-    let bankerVsPlayer = [
-      { name: 'Player', value: 0 },
-      { name: 'Banker', value: 0 },
+    let dragonVsTiger = [
+      { name: 'Dragon', value: 0 },
+      { name: 'Tiger', value: 0 },
       { name: 'Tie', value: 0 },
     ]
     const sideWin = SideWin
@@ -313,23 +313,23 @@ const DragonTigerDashboard = () => {
     }
 
     for (let i = 0; i < resData?.length; i++) {
-      if (resData[i]?.winner == 'P') bankerVsPlayer[0].value += 1
-      if (resData[i]?.winner == 'B') bankerVsPlayer[1].value += 1
-      if (resData[i]?.winner == 'T') bankerVsPlayer[2].value += 1
+      if (resData[i]?.winner == 'D') dragonVsTiger[0].value += 1
+      if (resData[i]?.winner == 'T') dragonVsTiger[1].value += 1
+      if (resData[i]?.winner == 'C') dragonVsTiger[2].value += 1
 
-      if (resData[i]?.side_win == 'PP') sideWin[2].value += 1
-      if (resData[i]?.side_win == 'BP') sideWin[3].value += 1
-      if (resData[i]?.side_win == 'TG') sideWin[4].value += 1
-      if (resData[i]?.side_win == 'S6') sideWin[5].value += 1
-      if (resData[i]?.side_win == 'TGR') sideWin[6].value += 1
-      if (resData[i]?.side_win == 'TP') sideWin[7].value += 1
-      if (resData[i]?.side_win == 'TW') sideWin[8].value += 1
-      if (resData[i]?.side_win == 'TT') sideWin[9].value += 1
-      if (resData[i]?.side_win == 'BT') sideWin[10].value += 1
-      if (resData[i]?.side_win == 'ST') sideWin[11].value += 1
-      if (resData[i]?.side_win == 'BD') sideWin[12].value += 1
-      if (resData[i]?.side_win == 'SD') sideWin[13].value += 1
-      if (resData[i]?.side_win == 'DT') sideWin[14].value += 1
+      if (resData[i]?.side_win == 'PP') sideWin[3].value += 1
+      if (resData[i]?.side_win == 'BP') sideWin[4].value += 1
+      if (resData[i]?.side_win == 'TG') sideWin[5].value += 1
+      if (resData[i]?.side_win == 'S6') sideWin[6].value += 1
+      if (resData[i]?.side_win == 'TGR') sideWin[7].value += 1
+      if (resData[i]?.side_win == 'TP') sideWin[8].value += 1
+      if (resData[i]?.side_win == 'TW') sideWin[9].value += 1
+      if (resData[i]?.side_win == 'TT') sideWin[10].value += 1
+      if (resData[i]?.side_win == 'BT') sideWin[11].value += 1
+      if (resData[i]?.side_win == 'ST') sideWin[12].value += 1
+      if (resData[i]?.side_win == 'BD') sideWin[13].value += 1
+      if (resData[i]?.side_win == 'SD') sideWin[14].value += 1
+      if (resData[i]?.side_win == 'DT') sideWin[15].value += 1
 
       if (tempShoe != resData[i]?.shoe_no) {
         shoes.push(tempShoe)
@@ -350,21 +350,21 @@ const DragonTigerDashboard = () => {
       resData[i].bankerCard2 = tempBankerSplit[1]
       if (tempBankerSplit[2]) resData[i].bankerCard3 = tempBankerSplit[2]
 
-      if (resData[i]?.playerCard1 == resData[i]?.playerCard2) playerPair += 1
-      if (resData[i]?.bankerCard1 == resData[i]?.bankerCard2) bankerPair += 1
+      if (resData[i]?.playerCard1 == resData[i]?.playerCard2) drogonPair += 1
+      if (resData[i]?.bankerCard1 == resData[i]?.bankerCard2) tigerPair += 1
       if (
         resData[i]?.playerCard3 &&
         resData[i]?.playerCard1 != resData[i]?.playerCard2 &&
         resData[i]?.playerCard2 == resData[i]?.playerCard3
       ) {
-        playerPair += 1
+        drogonPair += 1
       }
       if (
         resData[i]?.bankerCard3 &&
         resData[i]?.bankerCard1 != resData[i]?.bankerCard2 &&
         resData[i]?.bankerCard2 == resData[i]?.bankerCard3
       ) {
-        bankerPair += 1
+        tigerPair += 1
       }
 
       tempData.push(resData[i])
@@ -373,26 +373,28 @@ const DragonTigerDashboard = () => {
     shoes.push(tempShoe)
 
     data.push({ shoe: tempShoe, data: tempData })
+    console.log("streak - ",streak)
     for (let i in streak) {
-      if (streak[i][0] == 'P') {
-        playerStreak++
+    console.log("streak - ",i," " ,streak[i][0])
+
+      if (streak[i][0] == 'D') {
+        dragonStreak++
       }
-      if (streak[i][0] == 'B') {
-        bankerStreak++
+      if (streak[i][0] == 'T') {
+        tigerStreak++
       }
     }
 
     const doughnutData = [
-      { name: 'Player Streak', value: playerStreak },
-      { name: 'Banker Streak', value: bankerStreak },
-      { name: 'Player Pair', value: playerPair },
-      { name: 'Banker Pair', value: bankerPair },
+      { name: 'Dragon Streak', value: dragonStreak },
+      { name: 'Player Streak', value: tigerStreak },
+      
     ]
 
-    sideWin[0].value = playerStreak
-    sideWin[1].value = bankerStreak
+    sideWin[0].value = dragonStreak
+    sideWin[1].value = tigerStreak
 
-    setBankerVsPlayer(bankerVsPlayer)
+    setDragonVsTiger(dragonVsTiger)
     setShoes(resShoes?.data?.result)
     //console.log('processed data', data)
     setData(data)
@@ -649,7 +651,7 @@ const DragonTigerDashboard = () => {
                         </div>
                       </div>
                       <div className={``}>
-                        <PieChartComponent bankerVsPlayer={bankerVsPlayer} />
+                        <PieChartComponent dragonVsTiger={dragonVsTiger} />
                       </div>
                     </div>
                   </div>

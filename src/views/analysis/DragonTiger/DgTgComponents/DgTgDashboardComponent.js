@@ -44,16 +44,15 @@ const DgTgDashboardComponent = (props) => {
   const [shoeDataSize, setShoeDataSize] = useState(0)
   const [sideWin, setSideWin] = useState(ShoeSideWin)
   const [dataSize, setDataSize] = useState(0)
-  const [bankerVsPlayer, setBankerVsPlayer] = useState([
-    { name: 'Banker', value: 0 },
-    { name: 'Player', value: 0 },
+  const [dragonVsTiger, setDragonVsTiger] = useState([
+    { name: 'Dragon', value: 0 },
+    { name: 'Tiger', value: 0 },
     { name: 'Tie', value: 0 },
   ])
   const [doughnutData, setDoughnutData] = useState([
     { name: 'Banker Streak', value: 0 },
     { name: 'Player Streak', value: 0 },
-    { name: 'Banker Pair', value: 0 },
-    { name: 'Player Pair', value: 0 },
+    
   ])
   const [showDoughnut, setShowDoughnut] = useState(true)
   const [playerCardImage1, setPlayerCardImage1] = useState(null)
@@ -93,20 +92,29 @@ const DgTgDashboardComponent = (props) => {
     let bankerPair = 0
     let streak = []
     let tempStreak = []
-    let tempCurrentWinner = shoeData[0]?.winner
+    let tempCurrentWinner = ''
 
-    // Initialize bankerVsPlayer to track the count of wins for Player, Banker, and Tie
-    let bankerVsPlayer = [
-      { name: 'Player', value: 0 },
-      { name: 'Banker', value: 0 },
+     for (let i in shoeData) {
+      if (shoeData[i]?.winner == 'D' || shoeData[i]?.winner == 'T') {
+        tempCurrentWinner = shoeData[i]?.winner
+        break
+      }
+    }
+
+    // Initialize dragonVsTiger to track the count of wins for Player, Banker, and Tie
+    let dragonVsTiger = [
+      { name: 'Dragon', value: 0 },
+      { name: 'Tiger', value: 0 },
       { name: 'Tie', value: 0 },
     ]
 
     // Iterate through the shoe data to identify streaks
-    for (let i = 0; i < shoeData?.length; i++) {
-      if (i < shoeData?.length - 2 && tempCurrentWinner === shoeData[i + 1]?.winner) {
+   /*  for (let i = 0; i < shoeData?.length; i++) {
+      if (tempCurrentWinner == shoeData[i + 1]?.winner && i < shoeData?.length - 2 ) {
         tempStreak.push(tempCurrentWinner)
+        console.log("tempStreak ",tempStreak.length," ",tempStreak)
       } else {
+        //console.log("tempStreak ",tempStreak.length," ",tempStreak)
         if (tempStreak?.length > 0) {
           streak.push(tempStreak)
           tempStreak = []
@@ -115,23 +123,42 @@ const DgTgDashboardComponent = (props) => {
           tempCurrentWinner = shoeData[i + 1]?.winner
         }
       }
+      console.log(shoeData?.length," shoeData[i]?.winner: ",i ,shoeData[i]?.winner , "tempCurrentWinner: ",tempCurrentWinner)
     }
+
+    console.log("streak : ",streak) */
+
+    for (let i = 0; i < shoeData?.length; i++) {
+  // Push current winner to tempStreak
+  tempStreak.push(shoeData[i]?.winner);
+
+  // Check if next winner is different or if it's the last element
+  if (i === shoeData?.length - 1 || shoeData[i]?.winner !== shoeData[i + 1]?.winner) {
+    // Only push to streak if the streak length is more than 1
+    if (tempStreak.length > 1) {
+      streak.push([...tempStreak]);
+    }
+    tempStreak = [];
+  }
+}
+
+console.log("streak (more than 1): ", streak);
 
     // Count the number of player and banker streaks
     for (let i in streak) {
-      if (streak[i][0] === 'P') {
+      if (streak[i][0] === 'D') {
         playerStreak++
       }
-      if (streak[i][0] === 'B') {
+      if (streak[i][0] === 'T') {
         bankerStreak++
       }
     }
 
     // Iterate through the shoe data to update win counts, pairs, and side wins
     for (let i = 0; i < shoeData?.length; i++) {
-      if (shoeData[i]?.winner === 'P') bankerVsPlayer[0].value += 1
-      if (shoeData[i]?.winner === 'B') bankerVsPlayer[1].value += 1
-      if (shoeData[i]?.winner === 'T') bankerVsPlayer[2].value += 1
+      if (shoeData[i]?.winner === 'D') dragonVsTiger[0].value += 1
+      if (shoeData[i]?.winner === 'T') dragonVsTiger[1].value += 1
+      if (shoeData[i]?.winner === 'C') dragonVsTiger[2].value += 1
 
       if (shoeData[i]?.playerCard1 === shoeData[i]?.playerCard2) playerPair += 1
       if (shoeData[i]?.bankerCard1 === shoeData[i]?.bankerCard2) bankerPair += 1
@@ -172,10 +199,9 @@ const DgTgDashboardComponent = (props) => {
 
     // Prepare the doughnut data for visualization
     const doughnutData = [
-      { name: 'Player Streak', value: playerStreak },
-      { name: 'Banker Streak', value: bankerStreak },
-      { name: 'Player Pair', value: playerPair },
-      { name: 'Banker Pair', value: bankerPair },
+      { name: 'Dragon Streak', value: playerStreak },
+      { name: 'Tiger Streak', value: bankerStreak },
+     
     ]
 
     // Determine whether to show the doughnut chart based on the data
@@ -188,7 +214,7 @@ const DgTgDashboardComponent = (props) => {
     }
 
     // Update the state variables with the processed data
-    setBankerVsPlayer(bankerVsPlayer)
+    setDragonVsTiger(dragonVsTiger)
     setDoughnutData(doughnutData)
     setSideWin(sideWin)
     setRenderKey(renderKey + 1)
@@ -810,7 +836,7 @@ const DgTgDashboardComponent = (props) => {
                       </div>
                     </div>
                     <div className={``}>
-                      <PieChartComponent bankerVsPlayer={bankerVsPlayer} />
+                      <PieChartComponent dragonVsTiger={dragonVsTiger} />
                     </div>
                   </div>
                 </div>
